@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AquentChallenge">
+
+<head>
+    <title>Aquent Challenge</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Abdul Amoud">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background: url(asanoha-400px.png);
+        }
+        input {
+            border: 0px;
+            margin-bottom: 25px;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+        }
+        .details {
+            background: white;
+            padding: 25px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+            margin-bottom: 50px;
+        }
+        tr {
+            height: 50px;
+        }
+        table {
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+        }
+        .t-frame{
+            height: 725px; 
+            overflow-y: auto; 
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.5);
+            margin-bottom: 50px;
+        }
+        img {
+            width: 100%;
+        }
+        thead {
+            font-size: 17px;
+        }
+        td, h5 {
+            color: #777777;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="PersonsController">
+        <h1 style="font-size: 50px">UX Society Members</h1>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <input placeholder="Search Members..." type="text" id="name" ng-model="search" style="width: 100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="t-frame">
+                    <table id="example" class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Occupation</th>
+                            <th>Company</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="person in filteredPersons = (persons | filter: search)" ng-style="{ 'background-color': $index == selectedIndex ? 'lightgray' : ''}" ng-click="selectPerson(person, $index)">
+                            <td>{{ person.firstName }} {{ person.middleInitial }}. {{ person.surname }}</td>
+                            <td>{{ person.occupation }}</td>
+                            <td>{{ person.company }}</td>
+                        </tr>
+                    </tbody>
+                    <tr ng-show="filteredPersons.length == 0">
+                        <td colspan="4">
+                            <div class="alert alert-info">
+                                <p class="text-center">No results found for search term '{{ search }}'</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="details">
+                    <center>
+                        <h2>{{ selectedPerson.firstName }} {{ selectedPerson.middleInitial }}. {{ selectedPerson.surname }}</h2>
+                        <img class="img-responisve" src="{{selectedPerson.portrait}}">  
+                        <h5 style="font-size: 20px; line-height: 2">{{selectedPerson.occupation}} <br> {{selectedPerson.username }},<br>{{selectedPerson.company}}</h5>
+                    <blockquote>{{selectedPerson.motto}}</blockquote>
+                </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- JavaScripts -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
