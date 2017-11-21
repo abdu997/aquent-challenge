@@ -2,11 +2,6 @@ var app = angular.module('AquentChallenge', []);
 
 app.controller('PersonsController', function ($scope) {
 
-	$scope.search = "";
-	$scope.order = "email";
-	$scope.selectedIndex = null;
-	$scope.selectedPerson = null;
-
 	$scope.selectPerson = function (person, index) {
 		$scope.selectedIndex = index;
 		$scope.selectedPerson = person;
